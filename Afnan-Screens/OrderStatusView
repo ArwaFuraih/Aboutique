@@ -1,0 +1,92 @@
+//
+//  OrderStatusView.swift
+//  Aboutiqe
+//
+//  Created by Afnan Abdullah on 17/06/1443 AH.
+//
+
+import SwiftUI
+
+struct OrderStatusView: View {
+    init(){
+        UITableView.appearance().backgroundColor = .clear
+    }
+    var body: some View {
+        ZStack {
+            Color(red: 230 / 255, green: 222 / 255, blue: 215 / 255)
+            
+           VStack{
+              
+                Form{
+                    
+                    Section(header :Text("")){
+                        HStack{
+                            Text ("Out for delivery")
+                                .font(.system(size: 24).bold())
+                            Spacer()
+                        ZStack{
+                            Rectangle()
+                                .foregroundColor(Color(red: 230 / 255, green: 222 / 255, blue: 215 / 255))
+                                .frame(width: 110, height:93)
+                                .cornerRadius(10)
+                            
+                            Image("bag")
+                                .resizable()
+                                .frame(width: 90, height: 70)
+                                .padding()
+                                
+                        }
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                    Section(header :Text("Order Information")){
+
+                            VStack(alignment: .leading , spacing: 8){
+                                Text("Order Name: Chanel handbag")
+                                    .font(.system(size: 12))
+                                Text("Order ID: SA68449")
+                                    .font(.system(size: 12))
+                                Text("Tracking Number: 3769110895")
+                                    .font(.system(size: 12))
+                                Text("Carrier: DHL Express")
+                                    .font(.system(size: 12))
+                                Text("Location:  Rue Cambon PAR, France")
+                                    .font(.system(size: 12))
+                            }
+                        }
+                   
+                    
+                    Section(header :Text("Truck Shipping")){
+                        ScrollView{
+                        VStack(spacing: 0){
+                            TruckProgressView(date: "Oct 31", status: "Ordered Sunday", icon: "o.circle.fill", isFirst: true, isLast: false,checkColor: false)
+                            TruckProgressView(date: "Nov 6", status: "Shipped Sunday", icon: "r.circle.fill", isFirst: false, isLast: false,checkColor: false)
+                            TruckProgressView(date: "Nov 11", status: "Out for delivery", icon: "o.circle.fill", isFirst: false, isLast: false,checkColor: false)
+                            TruckProgressView(date: "Nov 16", status: "Arriving today", icon: "a.circle.fill", isFirst: false, isLast: true,checkColor: true)
+                        }
+                        }
+                    }
+                
+                
+                }
+            }
+            
+        }
+        
+        .navigationTitle("Order Status")
+        
+        
+   
+    
+}
+}
+
+struct OrderStatusView_Previews: PreviewProvider {
+    static var previews: some View {
+        OrderStatusView()
+    }
+}
