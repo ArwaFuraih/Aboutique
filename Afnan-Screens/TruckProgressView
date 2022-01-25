@@ -1,0 +1,69 @@
+//
+//  TruckProgressView.swift
+//  Aboutiqe
+//
+//  Created by Afnan Abdullah on 20/06/1443 AH.
+//
+
+import SwiftUI
+
+struct TruckProgressView: View {
+    
+    var date:String
+    var status:String
+    var icon:String
+    
+    var isFirst:Bool
+    var isLast:Bool
+    var checkColor:Bool
+    
+    var body: some View {
+        HStack{
+        Text(date)
+                .frame(width: 80)
+            ZStack{
+            VStack{
+                Rectangle()
+                    .frame(width:8, height: 50)
+                    //.foregroundColor(Color.green.opacity(0.5))
+                    .foregroundColor(self.checkColor ? Color.gray.opacity(0.5) : Color.green.opacity(0.5) )
+                    .opacity(self.isFirst ? 0.0 : 0.5)
+
+                Rectangle()
+                    .frame(width:8, height: 50)
+                    .foregroundColor(self.checkColor ? Color.gray.opacity(0.5) : Color.green.opacity(0.5) )
+                    .opacity(self.isLast ? 0.0 : 0.5)
+
+                
+                
+            }
+                Circle()
+                    .frame(width: 35, height: 35)
+                   // .foregroundColor(Color.green.opacity(0.5))
+                    .foregroundColor(self.checkColor ? Color.gray.opacity(0.5) : Color.green.opacity(0.5) )
+                Circle()
+                    .frame(width: 20, height: 20)
+                    //.foregroundColor(Color.green.opacity(0.8))
+                    .foregroundColor(self.checkColor ? Color.gray.opacity(0.8) : Color.green.opacity(0.8) )
+            }
+            HStack{
+            Image(systemName:icon)
+                    .font(.system(size: 16))
+                //.foregroundColor(.green )
+                .foregroundColor(self.checkColor ? Color.gray : Color.green )
+            Text(status)
+                    .font(.system(size: 16))
+                Spacer()
+            }.padding(.all,8)
+                .background(Color.gray.opacity(0.2))
+                .cornerRadius(8)
+            Spacer()
+        }
+    }
+}
+
+struct TruckProgressView_Previews: PreviewProvider {
+    static var previews: some View {
+        TruckProgressView(date: "May 12", status: "Packed", icon: "a.circle.fill", isFirst: false, isLast: false , checkColor: false).previewLayout(.sizeThatFits)
+    }
+}
