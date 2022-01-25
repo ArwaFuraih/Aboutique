@@ -1,0 +1,148 @@
+//
+//  ProfileView.swift
+//  Aboutiqe
+//
+//  Created by Afnan Abdullah on 16/06/1443 AH.
+//
+
+import SwiftUI
+
+struct ProfileView: View {
+    @State private var showingAlert = false
+    @State private var Language = 0
+    @State private var notification = false
+    init(){
+        UITableView.appearance().backgroundColor = .clear
+    }
+    var body: some View {
+        
+        NavigationView{
+            ZStack {
+                Color(red: 230 / 255, green: 222 / 255, blue: 215 / 255)
+                VStack{
+                    ZStack{
+                       Image("personalImage")
+                            .resizable()
+                            .frame(width: 137, height: 134, alignment: .center)
+                            .padding(.top)
+                        Image(systemName: "square.and.pencil")
+                            .foregroundColor(.gray)
+                            .padding(.top,110)
+
+                    }
+                    Text("@SaraIbrahim")
+                    Form{
+                        
+                        Section(header :Text("My Account")){
+                            VStack(alignment: .leading , spacing: 8){
+                                HStack(spacing: 8){
+                                   Image(systemName: "person")
+                                    Text("Full name")
+                                }
+                                Text("Sara Ibrahim")
+                                    .padding(.leading,4)
+                                    .padding(.top,2)
+                                    .foregroundColor(.gray)
+                                    
+                            }
+                            VStack(alignment: .leading , spacing: 8){
+                                HStack(spacing: 8){
+                                   Image(systemName: "phone")
+                                    Text("Phone Number")
+                                }
+                                Text("+96650522859")
+                                    .padding(.leading,4)
+                                    .padding(.top,2)
+                                    .foregroundColor(.gray)
+                                    
+                            }
+                            VStack(alignment: .leading , spacing: 8){
+                                HStack{
+                                   Image(systemName: "envelope")
+                                    Text("Email")
+                                    
+                                }
+                                Text("SaraIbrahim1@hotmail.com")
+                                    //.foregroundColor(.gray)
+                                    .padding(.leading,4)
+                                    .padding(.top,2)
+                            }
+                        }
+                        
+                        Section(header :Text("Your Orders")){
+                            
+                            NavigationLink(
+                                destination: OrderStatusView() ,
+                                label: {
+                                                                HStack{
+                                                                    Image(systemName: "bag")
+                                                                     Text("Orders Status")
+                                                                }
+                                }
+                            
+                            
+                            
+                            )
+                        }
+                        Section(header:Text("Setting")){
+                            HStack{
+                                Image(systemName: "globe.americas")
+                                 Text("Language")
+                                    .padding(.trailing,60)
+                                Picker("", selection: $Language)
+                                {
+                                    Text("English").tag(0)
+                                    Text("Arabic").tag(1)
+                                }
+                                .pickerStyle(.segmented)
+                            }
+                            HStack{
+                                Image(systemName: "bell")
+                                Toggle(isOn: $notification) {
+                                    Text("Notification")
+                                }
+                            }
+                        }
+                        
+                        
+                        
+                        
+                    }.background(Color(red: 230 / 255, green: 222 / 255, blue: 215 / 255))
+                    
+                }
+
+                
+            }
+            .navigationTitle(Text("Profile"))
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarItems( trailing:Button(action: {
+                showingAlert = true
+            }, label: {
+                                HStack{
+                                    Text("Logout")
+                                        .foregroundColor(.black)
+                                    Image(systemName: "rectangle.portrait.and.arrow.right")
+                                        .foregroundColor(.black)
+                
+                                }
+            }))
+                            .alert("Log out", isPresented: $showingAlert) {
+                                Button("Yes") { }
+                                Button("No") { }
+                            
+                        } message: {
+                            Text("Are you sure you want to log out ?")
+                        }
+            
+            
+        }
+    }
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        ProfileView()
+    }
+}
+
+
