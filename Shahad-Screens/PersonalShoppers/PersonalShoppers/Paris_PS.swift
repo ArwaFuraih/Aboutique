@@ -24,13 +24,21 @@ struct Home2 : View {
     @State var selected = "row"
      
     var body : some View{
-        NavigationView{
+      //  NavigationView{
             
         VStack{
             
             ZStack{
                 
                 HStack{
+                    Text("Personal Shoppers")
+                        .fontWeight(.bold)
+                        .frame(width: 400, height: 15, alignment: .leading)
+                        .font(.system(size: 25))
+                    
+                        .padding([.bottom], 20)
+                        .padding([.leading], 40.0)
+                    
                     //search
                 //    List{
                 //        ForEach(results ,id: \.self){ city in
@@ -42,8 +50,8 @@ struct Home2 : View {
                     //}
                     //hereeeeeee the search%%%%%%
                     
-                    Text("")
-                    .searchable(text: $SearchingFor)
+                 //   Text("")
+        //            .searchable(text: $SearchingFor)
                     
                     //ForEach(rowData.filter({"\($0)".contains(SearchingFor.lowercased()) || SearchingFor.isEmpty})){ i in
                        
@@ -82,14 +90,15 @@ struct Home2 : View {
                     }) {
                         
                         VStack{
-                            
-                            Image(systemName: "rectangle.grid.1x2")
+                            Image(systemName: "rectangle.grid.2x2")
+                          //  Image(systemName: "rectangle.grid.1x2")
                                 .resizable()
                                 .frame(width: 25, height: 25)
                                 .foregroundColor(self.selected == "row" ? Color.black : Color.black.opacity(0.2))
                             
+                            
                             Circle().fill(self.selected == "row" ? Color.black : Color.clear).frame(width: 5, height: 5).padding(.vertical,4.0)
-                        }
+                        }.padding(.leading, 280.0)
 
                     }
                     
@@ -99,21 +108,21 @@ struct Home2 : View {
                         
                     }) {
                         
-                        VStack{
-                            
-                            Image(systemName: "rectangle.grid.2x2")
+                        VStack(alignment: .trailing){
+                            Image(systemName: "rectangle.grid.1x2")
+                           // Image(systemName: "rectangle.grid.2x2")
                                 .resizable(capInsets: EdgeInsets())
                                 .frame(width: 25.0, height: 25)
                                 .foregroundColor(self.selected == "grid" ? Color.black : Color.black.opacity(0.2))
                             
-                            Circle().fill(self.selected == "grid" ? Color.black : Color.clear).frame(width: 5, height: 5).padding(.vertical,4)
+                            Circle().fill(self.selected == "grid" ? Color.black : Color.clear).frame(width: 25, height: 5).padding(.vertical,4)
                         }
-                      //  .padding(.trailing, 280.0)
+                       // .padding(.leading, 280.0)
   
                     }
                 }
                 
-            }.padding([.top,.horizontal], -25.0)
+            }//.padding([.top,.horizontal], -25.0)
             .background(Color.white)
             
            
@@ -122,11 +131,12 @@ struct Home2 : View {
                 
                 if self.selected == "row"{
                     
-                    RowView_Paris()
+                    //RowView_Paris()
+                    GridView_Paris()
                 }
                 else{
-                    
-                    GridView_Paris()
+                    RowView_Paris()
+                   // GridView_Paris()
                 }
             }
             
@@ -134,9 +144,10 @@ struct Home2 : View {
         .padding(.top,UIApplication.shared.windows.first?.safeAreaInsets.top)
         .padding(.bottom,10)
             
-        .navigationTitle("Personal Shoppers")
-               .navigationBarTitleDisplayMode(.inline)
-    }
+       // .navigationTitle("Personal Shoppers")
+           
+              // .navigationBarTitleDisplayMode(.inline)
+    //}
 }
     //search
    // var results: [String]{
@@ -164,7 +175,7 @@ struct RowView_Paris : View {
                 //search for row
             
             ForEach(rowData_Paris){i in
-                
+                NavigationLink (destination: TheHuntress(id: i.id) , label:{
                 VStack{
                     
                     Image(i.pic).resizable().frame( height: 200)
@@ -176,6 +187,7 @@ struct RowView_Paris : View {
                         
                         
                         Text(i.name).font(.title)
+                            .foregroundColor(Color.black)
                         VStack{
                             
                         Text(i.city)
@@ -196,11 +208,13 @@ struct RowView_Paris : View {
                             Image("􀋃").renderingMode(.original)
                         }
                         Text(i.likes)
-                        
+                            .foregroundColor(Color.black)
                     }.padding()
                     
                 }.background(Color.white)
                 .cornerRadius(11)
+                }
+                                )
             }
             
         }.padding()
@@ -215,7 +229,7 @@ struct GridView_Paris : View {
         VStack(spacing: 18){
           
             ForEach(gridData_Paris){i in
-              
+                NavigationLink (destination: TheHuntress(id: i.id) , label:{
                 HStack(spacing: 15){
                     
                     ForEach(i.rows){j in
@@ -231,7 +245,7 @@ struct GridView_Paris : View {
                             HStack{
                                 
                                 Text(j.name)
-                                
+                                    .foregroundColor(Color.black)
                                 Spacer(minLength: 0)
                               
                             }.padding(.horizontal)
@@ -255,11 +269,15 @@ struct GridView_Paris : View {
                                     Image("􀋃").renderingMode(.original)
                                 }
                                 Text(j.likes)
+                                    .foregroundColor(Color.black)
                             }.padding([.horizontal,.bottom])
                         }.background(Color.white)
                         .cornerRadius(11)
                     }
                 }
+                    
+                }
+                                )
             }
             
         }.padding()
