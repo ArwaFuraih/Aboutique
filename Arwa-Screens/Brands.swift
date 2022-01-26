@@ -46,95 +46,111 @@ let brands2 = [
 struct Brands: View {
     
     @State private var searchText = ""
-
+    @State var id = 0
+    
     var body: some View {
         
         NavigationView {
             VStack(alignment: .leading){
                 
                 Divider()
-
                 
-                Text("Shop by Cities\(searchText)")
-                                .searchable(text: $searchText)
+                //
+                //                Text("Shop by Cities\(searchText)")
+                //                                .searchable(text: $searchText)
+                
+                
+                Text("Shop by Cities")
+                
+                //----------scroll view
+                ScrollView(.horizontal , showsIndicators: false) {
+                    HStack {
+                        ForEach(events) { event in
+                         
+                            NavigationLink (destination: Shoppers(id: event.id) , label: {
+                                                VStack {
+                                Text(event.pic)
+                                //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
                                 
-            
-    //----------scroll view
-      ScrollView(.horizontal , showsIndicators: false) {
-                        HStack {
-                            ForEach(events) { event in
-                                VStack {
-                                    Text(event.pic)
-                                        //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
-                                        
-                                        
-                                    Text(event.city)
-                                        .font(.system(.callout))
-                                        
-                                }
-                                .padding(2)
-                                .background(event.color)
-                                .cornerRadius(11)
-                                .scaledToFit()
+                                
+                                Text(event.city)
+                                    .font(.system(.callout))
                                 
                             }
-                          
+                                                .padding(2)
+                                                .background(event.color)
+                                                .cornerRadius(11)
+                                                .scaledToFit()
+                            }
+                                             
+                                            )
+//
+                                              
+                            
+                            
                         }
-                    }//city scroll view
-                    .padding()
-      
-          
+                        
+                    }
+                }//city scroll view
+                .padding()
+                
                 Text("Shop by Brands")
                 
                 
                 
-    //----------brands stack
-        
-//            HStack {
-//                ForEach(brands1) { brand in
-//                    VStack {
-//                        Text(brand.pic)
-//                            //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
-//
-//                    }
-//                    .padding(2)
-//                    .background(brand.color)
-//                    .cornerRadius(11)
-//                    .scaledToFit()
-//
-//                }
-//
-//            }//brands Hstack
-            
-//                HStack {
-//                    ForEach(brands2) { brand in
-//                        VStack {
-//                            Text(brand.pic)
-//                                //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
-//
-//                        }
-//                        .padding(2)
-//                        .background(brand.color)
-//                        .cornerRadius(11)
-//                        .scaledToFit()
-//
-//                    }
-//
-//                }//brands Hstack
-            
+                //----------brands stack
+                
+                //            HStack {
+                //                ForEach(brands1) { brand in
+                //                    VStack {
+                //                        Text(brand.pic)
+                //                            //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
+                //
+                //                    }
+                //                    .padding(2)
+                //                    .background(brand.color)
+                //                    .cornerRadius(11)
+                //                    .scaledToFit()
+                //
+                //                }
+                //
+                //            }//brands Hstack
+                
+                //                HStack {
+                //                    ForEach(brands2) { brand in
+                //                        VStack {
+                //                            Text(brand.pic)
+                //                                //.shadow(color: Color("lightShadow"), radius: 0, x: 0, y: -15 ); blur(radius: 15)
+                //
+                //                        }
+                //                        .padding(2)
+                //                        .background(brand.color)
+                //                        .cornerRadius(11)
+                //                        .scaledToFit()
+                //
+                //                    }
+                //
+                //                }//brands Hstack
+                
                 
                 
                 HStack{
                     
-                ZStack{
-                    Rectangle()
-                        .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
-                        .cornerRadius(15)
-                        .frame(width: 115.0, height: 69.0)
-                    Image ("chenellogo")
-                }
-                
-                
+                    
+                    
+                    //Navigate to Homepage
+                    NavigationLink(destination: Splash()){
+                        ZStack{
+                            Rectangle()
+                                .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
+                                .cornerRadius(15)
+                                .frame(width: 115.0, height: 69.0)
+                            Image ("chenellogo")
+                            
+                        }
+                    }
+                    
+                    
                     ZStack{
                         Rectangle()
                             .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
@@ -151,19 +167,19 @@ struct Brands: View {
                         Image ("lvlogo")
                     }
                     
-            }//Hstack brands1
+                }//Hstack brands1
                 
                 HStack{
                     
-                ZStack{
-                    Rectangle()
-                        .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
-                        .cornerRadius(15)
-                        .frame(width: 115.0, height: 69.0)
-                    Image ("diorlogo")
-                }
-                
-                
+                    ZStack{
+                        Rectangle()
+                            .fill(Color(red: 0.902, green: 0.871, blue: 0.843))
+                            .cornerRadius(15)
+                            .frame(width: 115.0, height: 69.0)
+                        Image ("diorlogo")
+                    }
+                    
+                    
                     ZStack{
                         Rectangle()
                             .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
@@ -186,20 +202,20 @@ struct Brands: View {
                 
                 
                 Text("Shop Others")
-
-    //-------------others stack
+                
+                //-------------others stack
                 
                 HStack{
                     
-                ZStack{
-                    Rectangle()
-                        .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
-                        .cornerRadius(15)
-                        .frame(width: 169, height: 108)
-                    Image ("Applelogo")
-                }
-                
-                
+                    ZStack{
+                        Rectangle()
+                            .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(15)
+                            .frame(width: 169, height: 108)
+                        Image ("Applelogo")
+                    }
+                    
+                    
                     ZStack{
                         Rectangle()
                             .fill(/*@START_MENU_TOKEN@*/Color(red: 0.902, green: 0.871, blue: 0.843)/*@END_MENU_TOKEN@*/)
@@ -207,7 +223,7 @@ struct Brands: View {
                             .frame(width: 169, height: 108)
                         Image ("tiffanylogo")
                     }
-                
+                    
                 }//others stack
                 
                 
@@ -215,8 +231,8 @@ struct Brands: View {
                 
                 .navigationBarTitle("Aboutique" , displayMode: .inline )
             }
-            .padding(.leading)//navigation
-        
+            .padding()//navigation
+            
         }//Vstack -all-
         
     }//body
@@ -226,18 +242,18 @@ struct Brands: View {
 
 //inner shadow code
 struct InnerShadowModifier: ViewModifier {
-@State var radius: CGFloat = 10
-func body(content: Content) -> some View {
-content
-.overlay(
-RoundedRectangle(cornerRadius: radius)
- .stroke(Color("bgColor"), lineWidth: 4)
- .shadow(color: Color("darkShadow"), radius: 4, x: 5, y: 5)
- .clipShape(RoundedRectangle(cornerRadius: radius))
- .shadow(color: Color("lightShadow"), radius: 4, x: -5, y: -5)
- .clipShape(RoundedRectangle(cornerRadius: radius)
-))
-}
+    @State var radius: CGFloat = 10
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                RoundedRectangle(cornerRadius: radius)
+                    .stroke(Color("bgColor"), lineWidth: 4)
+                    .shadow(color: Color("darkShadow"), radius: 4, x: 5, y: 5)
+                    .clipShape(RoundedRectangle(cornerRadius: radius))
+                    .shadow(color: Color("lightShadow"), radius: 4, x: -5, y: -5)
+                    .clipShape(RoundedRectangle(cornerRadius: radius)
+                              ))
+    }
 }
 
 struct Brands_Previews: PreviewProvider {
