@@ -75,6 +75,8 @@ struct Brands: View {
                                 
                                 Text(event.city)
                                     .font(.system(.callout))
+                                    .foregroundColor(Color.black)
+
                                 
                             }
                                                 .padding(2)
